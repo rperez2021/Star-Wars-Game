@@ -10,6 +10,10 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+        
 </head>
 
 <body>
@@ -32,43 +36,90 @@
                 <p class="text-center">Select Your Villan</p>
             </div>
         </div>
-        <div class="row">
+        <div class="row herolist">
             <div class="container jumbotron col-5 bg-light lightside text-center p-3">
-                <img class="img-fluid" id="chewey" src="assets/images/chewey.jpg">
-                <img class="img-fluid" id="r2d2" src="assets/images/r2d2.jpg">
-                <img class="img-fluid" id="luke" src="assets/images/luke.jpg">
-                <div class="progress mt-2">
-                    <div class="progress-bar w-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100</div>
+                <img class="img-fluid hero" id="chewey" src="assets/images/chewey.jpg">
+                <img class="img-fluid hero" id="r2d2" src="assets/images/r2d2.jpg">
+                <img class="img-fluid hero" id="luke" src="assets/images/luke.jpg">
+                <div class="progress mt-2 herohealth invisible">
+                    <div class="progress-bar w-100 " role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100</div>
                 </div>
 
             </div>
-            <div class="col-2">
-
+            <div class="col-2 text-center py-5">            
+                <button type="button" class="attack btn btn-danger invisible">Attack!</button>
             </div>
             <div class="container jumbotron col-5 bg-light darkside text-center p-3">
-                <img class="img-fluid" id="darthvader" src="assets/images/darthvader.jpg">
-                <img class="img-fluid" id="bobafett" src="assets/images/bobafett.jpg">
-                <img class="img-fluid" id="kyloren" src="assets/images/kyloren.jpg">
+                <img class="img-fluid villan" id="darthvader" src="assets/images/darthvader.jpg">
+                <img class="img-fluid villan" id="bobafett" src="assets/images/bobafett.jpg">
+                <img class="img-fluid villan" id="kyloren" src="assets/images/kyloren.jpg">
                 <div class="progress mt-2">
-                        <div class="progress-bar w-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100</div>
-                    </div>
+                    <div class="progress-bar w-100 villanhealth invisible" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100</div>
+                </div>
             </div>
         </div>
         <div class="row">
-            <div class="jumbotron col-5 text-center bg-light">
-                <p>Light Side Journal</p>
-                <button type="button" class="btn btn-danger">Attack!</button>
+            <div class="jumbotron col-5 text-center bg-light pt-1">
+                <p id="lightjournal">Light Side Journal</p>
+                
             </div>
             <div class="col-2 text-center">
                 <p class="align-middle">VS</p>
             </div>
-            <div class="jumbotron col-5 text-center bg-light">
+            <div class="jumbotron col-5 text-center bg-light pt-1">
                 Dark Side Journal
             </div>
 
         </div>
     </div>
     <!-- Optional JavaScript -->
+    <script type="text/javascript">
+            var selectedhero = "";
+            var selectedvillan = "";
+
+        //Initialize Jquery
+        $(document).ready(function () {
+            //Variable List
+
+
+            //Select a hero
+            $(".herolist").on("click", ".hero", function () {
+                selectedhero = $(this).attr("id");
+            })
+
+            //Select villan
+            $(".herolist").on("click", ".villan", function () {
+                selectedvillan = $(this).attr("id");
+            })
+
+            //Hide nonselected villan and heroes
+            $(".herolist").on("click", ".hero", function () { 
+                $(".hero").not(this).addClass("d-none");
+            })
+            $(".herolist").on("click", ".villan", function () { 
+                $(".villan").not(this).addClass("d-none");
+            })
+
+            
+            //Show hero and villan healthbars and attack button
+            $(".herolist").on("click", ".hero", function () { 
+                $(".herohealth").removeClass("invisible");
+            })
+            $(".herolist").on("click", ".villan", function () { 
+                $(".villanhealth").removeClass("invisible");
+            })
+            $(".herolist").on("click", ".hero", function () { 
+                $(".attack").removeClass("invisible");
+            })
+
+            //Attack click
+            $(".herolist").on("click", ".attack", function () { 
+                return attack(actualhero, actualvillan);
+            })
+        
+
+        });
+    </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
@@ -76,6 +127,7 @@
         crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+    <script src="assets/javascript/game.js"></script>
 </body>
 
 </html>
