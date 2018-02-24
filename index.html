@@ -33,7 +33,7 @@
             </div>
             <div class="col-5">
                 <p class="text-center">Dark Side</p>
-                <p class="text-center">Select Your Villan</p>
+                <p class="text-center">Select Your villain</p>
             </div>
         </div>
         <div class="row herolist">
@@ -42,7 +42,7 @@
                 <img class="img-fluid hero" id="r2d2" src="assets/images/r2d2.jpg">
                 <img class="img-fluid hero" id="luke" src="assets/images/luke.jpg">
                 <div class="progress mt-2 herohealth invisible">
-                    <div class="progress-bar w-100 " role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100</div>
+                    <div class="progress-bar w-100 " id="herohpbar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100</div>
                 </div>
 
             </div>
@@ -50,11 +50,11 @@
                 <button type="button" class="attack btn btn-danger invisible">Attack!</button>
             </div>
             <div class="container jumbotron col-5 bg-light darkside text-center p-3">
-                <img class="img-fluid villan" id="darthvader" src="assets/images/darthvader.jpg">
-                <img class="img-fluid villan" id="bobafett" src="assets/images/bobafett.jpg">
-                <img class="img-fluid villan" id="kyloren" src="assets/images/kyloren.jpg">
-                <div class="progress mt-2">
-                    <div class="progress-bar w-100 villanhealth invisible" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100</div>
+                <img class="img-fluid villain" id="darthvader" src="assets/images/darthvader.jpg">
+                <img class="img-fluid villain" id="bobafett" src="assets/images/bobafett.jpg">
+                <img class="img-fluid villain" id="kyloren" src="assets/images/kyloren.jpg">
+                <div class="progress villainhealth mt-2">
+                    <div class="progress-bar w-100  invisible" id="villainhpbar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100</div>
                 </div>
             </div>
         </div>
@@ -75,7 +75,7 @@
     <!-- Optional JavaScript -->
     <script type="text/javascript">
             var selectedhero = "";
-            var selectedvillan = "";
+            var selectedvillain = "";
 
         //Initialize Jquery
         $(document).ready(function () {
@@ -85,28 +85,30 @@
             //Select a hero
             $(".herolist").on("click", ".hero", function () {
                 selectedhero = $(this).attr("id");
+                selecthero(selectedhero);
             })
 
-            //Select villan
-            $(".herolist").on("click", ".villan", function () {
-                selectedvillan = $(this).attr("id");
+            //Select villain
+            $(".herolist").on("click", ".villain", function () {
+                selectedvillain = $(this).attr("id");
+                selectvillain(selectedvillain);
             })
 
-            //Hide nonselected villan and heroes
+            //Hide nonselected villain and heroes
             $(".herolist").on("click", ".hero", function () { 
                 $(".hero").not(this).addClass("d-none");
             })
-            $(".herolist").on("click", ".villan", function () { 
-                $(".villan").not(this).addClass("d-none");
+            $(".herolist").on("click", ".villain", function () { 
+                $(".villain").not(this).addClass("d-none");
             })
 
             
-            //Show hero and villan healthbars and attack button
+            //Show hero and villain healthbars and attack button
             $(".herolist").on("click", ".hero", function () { 
                 $(".herohealth").removeClass("invisible");
             })
-            $(".herolist").on("click", ".villan", function () { 
-                $(".villanhealth").removeClass("invisible");
+            $(".herolist").on("click", ".villain", function () { 
+                $(".villainhealth").removeClass("invisible");
             })
             $(".herolist").on("click", ".hero", function () { 
                 $(".attack").removeClass("invisible");
@@ -114,7 +116,7 @@
 
             //Attack click
             $(".herolist").on("click", ".attack", function () { 
-                return attack(actualhero, actualvillan);
+                return attack(actualhero, actualvillain);
             })
         
 
