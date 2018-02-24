@@ -53,8 +53,8 @@
                 <img class="img-fluid villain" id="darthvader" src="assets/images/darthvader.jpg">
                 <img class="img-fluid villain" id="bobafett" src="assets/images/bobafett.jpg">
                 <img class="img-fluid villain" id="kyloren" src="assets/images/kyloren.jpg">
-                <div class="progress villainhealth mt-2">
-                    <div class="progress-bar w-100  invisible" id="villainhpbar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100</div>
+                <div class="progress villainhealth invisible mt-2">
+                    <div class="progress-bar w-100" id="villainhpbar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100</div>
                 </div>
             </div>
         </div>
@@ -67,7 +67,7 @@
                 <p class="align-middle">VS</p>
             </div>
             <div class="jumbotron col-5 text-center bg-light pt-1">
-                Dark Side Journal
+                <p id="darkjournal">Dark Side Journal</p>
             </div>
 
         </div>
@@ -116,7 +116,8 @@
 
             //Attack click
             $(".herolist").on("click", ".attack", function () { 
-                return attack(actualhero, actualvillain);
+                attack(actualhero, actualvillain);
+                counterattack(actualhero, actualvillain);
             })
         
 
